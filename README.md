@@ -1,2 +1,2 @@
 # oborc.github.io
-This is my first attemp to build a blog by hexo and git.
+This is a repository to record my learning of java web
