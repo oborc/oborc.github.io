@@ -30,19 +30,15 @@ text 是自定义文件后缀。例如：application-text.yml
     private String template;
 ```
 
+![image-20180830095915641](/var/folders/0s/c9bws2n97dg02w8d5lh96vrh0000gn/T/abnerworks.Typora/image-20180830095915641.png)
+
 application-text.yml 如图：
 
-![image-20180828210538188](/var/folders/0s/c9bws2n97dg02w8d5lh96vrh0000gn/T/abnerworks.Typora/image-20180828210538188.png)
+![image-20180830100017259](/var/folders/0s/c9bws2n97dg02w8d5lh96vrh0000gn/T/abnerworks.Typora/image-20180830100017259.png)
 
 输出结果如下：
 
-![image-20180828210454785](/var/folders/0s/c9bws2n97dg02w8d5lh96vrh0000gn/T/abnerworks.Typora/image-20180828210454785.png)
+![image-20180830095931992](/var/folders/0s/c9bws2n97dg02w8d5lh96vrh0000gn/T/abnerworks.Typora/image-20180830095931992.png)
 
 并不需要创建实体类去进行注入。
-
-但是，在测试read yml 的时候，需要添加
-
-![image-20180828210714204](/var/folders/0s/c9bws2n97dg02w8d5lh96vrh0000gn/T/abnerworks.Typora/image-20180828210714204.png)
-
-这里，是说明mybatis、文件目录。还有运行环境的注解。
 
