@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: spring-boot-jpa
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    continue-on-error: false
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo?useSSL=false
+    username: root
+    password: root
+
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+    initialization-mode: always
+
+
+server:
+  port: 9090
