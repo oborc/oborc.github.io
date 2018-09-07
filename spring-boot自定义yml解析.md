@@ -3,8 +3,8 @@
 刚开始不知道怎么解析yml配置文件，上网找了很多资料，很多都只是写了要先用
 
 ```
-@Component
-@ConfigurationProperties(prefix = "yml文件名")
+@Component（表示注入容器）
+@ConfigurationProperties(prefix = "yml文件中组件名")
 ```
 
 这两个注解在实体类上标注，并用set和get方法设置和返回数据。
@@ -23,22 +23,18 @@ spring.profiles.include: text
 
 text 是自定义文件后缀。例如：application-text.yml
 
-然后在使用yml 的地方用@value 注解即可。
-
-```
- @Value("${text.template}")
+```java
+@CongigurationProfiles()注解是将配置文件中的所有属性都和当前类的属性匹配并注入。
+@Value("${text.template}")
     private String template;
+是单个注入，只选取某个值的时候用到。
+二者不能同事使用。
 ```
 
-![image-20180830095915641](/var/folders/0s/c9bws2n97dg02w8d5lh96vrh0000gn/T/abnerworks.Typora/image-20180830095915641.png)
+在自定义的配置文件的时候，可以在代码中加上
 
-application-text.yml 如图：
+```java
+@ProperitySource(value={"文件路径"})
+```
 
-![image-20180830100017259](/var/folders/0s/c9bws2n97dg02w8d5lh96vrh0000gn/T/abnerworks.Typora/image-20180830100017259.png)
-
-输出结果如下：
-
-![image-20180830095931992](/var/folders/0s/c9bws2n97dg02w8d5lh96vrh0000gn/T/abnerworks.Typora/image-20180830095931992.png)
-
-并不需要创建实体类去进行注入。
-
+来表明配置文件的路径，表示要在某个路径下去读取配置文件。一般直接放在resource文件夹下，是默认路径。可不加该注解。即resource就是classpath。
