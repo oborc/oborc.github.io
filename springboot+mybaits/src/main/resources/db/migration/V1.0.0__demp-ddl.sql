@@ -1,0 +1,1 @@
+create table user(age int ,name varchar(20),Idcard varchar(18))

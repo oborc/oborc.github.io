@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    include: person
+  application:
+    name: spring-boot-jpa
+#  jpa:
+#    generate-ddl: false
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+  datasource:
+    continue-on-error: false
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo?useSSL=false
+    username: root
+    password: root
+server:
+  port: 9090
