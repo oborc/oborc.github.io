@@ -87,7 +87,7 @@
 
    申明部分包含一个参数，参数也是一个类型变量，用于指定一个泛型类型名称的标识符。 
 
-   ![image-20181115115450564](/Users/haha/Documents/Learning/oborc.github.io/img/image-20181115115450564.png)
+   ![image-20181115120208298](img/image-20181115120208298.png)
 
 ### 总结
 
