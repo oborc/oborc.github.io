@@ -1,9 +1,9 @@
-package com.example.demo.Entity;
+package com.example.demo.entity;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user1")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue
