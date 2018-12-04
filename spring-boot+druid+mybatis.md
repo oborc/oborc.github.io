@@ -1,0 +1,10 @@
+# spring-boot+druid+mybatis 动态创建数据源
+
+很多blog中写的都是动态切换数据源，在配置文件中已经定义好很多个数据源之后，用AOP进行切换或者配置好多个sqlSessionTemplate来进行数据源的切换。
+
+但在实际应用场景中，可能会存在需要动态的创建数据源，而不是动态的切换数据源的需求，在读取配置文件之前并不知道数据源的url或者别的参数。url 都是在程序中动态生成。并且，在配置好的数据源都是由spring+mybatis动态注入，sqlSession是由spring自动生成的sqlSession，只有一个实例，在并发的情况下，需要多个sqlSession的时候，就不能通过配置文件中申明数据源，在Java代码中设置url来实现。
+
+首先，动态创建数据源要分清mybatis中sqlSession、sqlSessionFactory、sqlSessionFactortBean、sqlSessionTemplate 中的联系和区别。
+
+### sqlSessionFactoryBean
+
