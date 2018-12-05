@@ -21,7 +21,7 @@ public class DemoApplicationTests {
     private UserService userService;
     @Test
     public void testMapper() {
-        userService.seletAll();
+        userService.seletAllTest();
     }
 
 

@@ -1,19 +1,31 @@
 package com.example.demo.entity;
 
+import tk.mybatis.mapper.annotation.KeySql;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
 public class User {
-    @Id
-    @GeneratedValue
-    private int Id;
+    @KeySql(useGeneratedKeys = true)
+    private Long id;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "age")
-    private int age;
+    private Integer age;
+
+    @Column(name = "idcard")
+    private String idcard;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -23,11 +35,20 @@ public class User {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
 }
+

@@ -5,10 +5,15 @@ spring:
     url: jdbc:mysql://localhost:3306/demo?useSSL=false
     username: root
     password: root
+  cache:
+    type: simple
+    cache-names: testCache
 server:
   port: 9090
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: com.example.demo.entity
+debug: true
+
 
 
