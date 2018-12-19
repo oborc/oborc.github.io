@@ -79,3 +79,8 @@ hashSet其实就是一个HashMap，内部new一个hashMap实例
 4. currentHashMap（分段锁原理）-实现currentMap
 5. 负载因子：0.75
 
+### List-set 区别
+
+------
+
+list-queue 可重复有序、set 不可重复无序
