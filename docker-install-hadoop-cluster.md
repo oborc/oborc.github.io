@@ -1,20 +1,18 @@
-## 使用docker 安装hadoop 集群
+## 使用docker 安装hadoop 集群（一）
 
 首先，使用docker 安装Hadoop集群，需要下载好jdk、Hadoop、的安装包。
 
 其次，准备好Hadoop 镜像。
 
-在物理机上配置集群，首先就是配置ssh 免密登陆。所以先做一个安装并启动ssh服务的镜像。然后在此镜像的基础上做含有Java环境和Hadoop环境的镜像。
-
 准备前提知识：
 
- Docker容器后台运行,就必须有一个前台进程.容器内没有后台服务的概念。
+ Docker容器后台运行,就必须有一个前台进程.容器内没有后台服务的概念。所以需要一个可以启动后台服务ssh的镜像
 
 对于容器而言，其启动程序就是容器应用进程，容器就是为了主进程而存在的，主进程退出，容器就失去了存在的意义，从而退出，其它辅助进程不是它需要关心的东西。
 
 ### 网络配置
 
-docker 中天然是网络隔离的，一般默认以172.17.0.0作为主机ip,docker 启动的容器从1开始编号。可以用docker create 自定义网段的固定IP/静态IP地址.
+docker 中一般默认以172.17.0.0作为主机ip,docker 启动的容器从1开始编号。可以用docker create 自定义网段的固定IP/静态IP地址.(docker 中网络这块还不了解)
 
 ```bash
 docker network create --subnet=172.172.0.0/16 docker-subnet-name
@@ -42,7 +40,8 @@ ssh 免密登陆是通过密钥来实现的，有两个验证过程。
   4 RUN yum install -y openssh-clients
   5 RUN  sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
   6 RUN  ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
-  7 #RUN  ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key
+  #这里生成rsa 加密方式的host_key是因为上述docker 容器中无法在启动ssh 服务，所以要先手动添加。
+  7 #RUN  ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key。可以增加也可以不加，另外一种加密方式
   8 RUN  yum install -y net-tools.x86_64
   9 RUN  yum install -y vim
  10 RUN  echo "root:111111" | chpasswd
@@ -50,6 +49,7 @@ ssh 免密登陆是通过密钥来实现的，有两个验证过程。
  12 EXPOSE 22
  13 
  14 CMD ["/usr/sbin/sshd","-D"]
+ 
 ```
 
 在这里 RUN 可以 用一个 RUN 代替。如下：
@@ -68,6 +68,7 @@ ssh 免密登陆是通过密钥来实现的，有两个验证过程。
  12 EXPOSE 22
  13 
  14 CMD ["/usr/sbin/sshd","-D"]
+ #-D：以后台守护进程方式运行服务
 ```
 
 用以上方式 run 建立镜像可以减少docker 文件层数。一个run 就是一层。
@@ -112,7 +113,7 @@ tips：
 docker run -t="image-name" .
 ```
 
-制作好Hadoop镜像后，用镜像启动一个容器。这里需要注意的是，启动容器不可以在run 后面增加启动容器的执行命令。
+制作好Hadoop镜像后，用镜像启动一个容器。这里需要注意的是，启动容器不可以在run 后面增加启动容器的执行命令。否则会默认代替dockerfile 中的cmd 命令，ssh 服务则不会启动。
 
 例如：
 
@@ -123,12 +124,12 @@ docker run -itd --name container-name --net docker-net-name --ip *.*.*.* image-n
 #image-name换为需要的镜像名
 ```
 
-这里的image-name 是制作好的hadoop 镜像的name.默认启动的程序是ssh.
+这里的image-name 是制作好的hadoop 镜像的name.默认启动ssh 为后台服务（这里的后台服务是做在容器的镜像里）
 
 然后可以用docker exec 进入容器,可以在运行中的容器中执行命令。
 
 ```bash
 docker exec -it container-name commond(/bin/bash)
-#这里用bash进入容器，容器中的前台任务任然是ssh
+#这里用bash进入容器，容器中有一个后台服务ssh.
 ```
 
