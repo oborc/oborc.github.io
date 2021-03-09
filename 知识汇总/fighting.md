@@ -107,7 +107,7 @@ session只有在服务器端，调用删除session的代码的时候才会被删
 
 ### 浏览器存储（localstorage sessionStorage ）
 
-​	localStorage: 长久保存，不删除就存在。
+​	localStorage: 长久保存，不删除就存在。setItem.getItem，localstorage只能存储字符串
 
 ​	sessionStorage:短期保存，标签页或者窗口关闭即消失
 
@@ -254,12 +254,14 @@ Function.prototype.myBind = function(target,arg){
 理解new: new是相当于实现一个实例，实例的原型[[proto]]都是指向构造函数的“原型对象(prototype)”
 
 ```js
-function myNew(){
-  //object.create的含义为（arg1,arg2,...）;以arg1作为原型创建新的对象
-  let obj = Object.create(arguments[0].prototype);//创建原型链对象
-  let args = Array.prototype.slice.call(arguments,1);
-  arguments[0].apply(obj,args);//用构造函数的apply将参数实现一遍，执行构造函数
-  return obj;
+var myNew = function(){
+    let arg = [...arguments];
+    let fn = arg[0];
+    let constructorArgs = arg.slice(1);
+    let o = {};
+    o.__proto__ = fn.prototype; // 将构造函数的作用域赋给新对象
+    fn.apply(o,constructorArgs); // 改变this指向
+    return o;
 }
 ```
 
