@@ -61,37 +61,7 @@ session->服务端机制，是服务器生成一个session对象，每次会话�
 
 session只有在服务器端，调用删除session的代码的时候才会被删除，创建同理。（服务被调用，自动创建-默认true，除非显示关闭）
 
-# 浏览器工作原理
-
-### 打开一个网页的过程（输入url到页面呈现的过程）
-
-​	浏览器解析url：解析出 主机名
-
-​	浏览器查询主机IP（DNS）
-
-​	浏览器获得端口号建立TCP连接
-
-​	浏览器发送请求
-
-​	浏览器接收响应报文
-
-​	浏览器解析报文
-
-​	浏览器关闭连接
-
-​	浏览器开始渲染页面
-
-​	渲染过程：
-
-​	解析DOM dom树
-
-​	解析CSS css树
-
-​	根据css+dom的可见节点（display:none不可见）生成的render树进行render
-
-​	如果有大小，位置改变的要回流--》（渲染树发生变化）
-
-​	颜色改变的要重绘--》css样式改变
+# 浏览器工作原理	
 
 ### 回流和重绘的区别
 
@@ -259,11 +229,21 @@ var myNew = function(){
     let fn = arg[0];
     let constructorArgs = arg.slice(1);
     let o = {};
-    o.__proto__ = fn.prototype; // 将构造函数的作用域赋给新对象
+    o.__proto__ = fn.prototype; // 将需要创建的对象的原型指向构造函数的原型对象。
     fn.apply(o,constructorArgs); // 改变this指向
     return o;
 }
 ```
+
+```javascript
+var protNew = function(){
+    let o = Object.create(arguments[0].prototype); // 利用create实现原型对象的改变
+    arguments[0].apply(o,null);
+    return o;
+}
+```
+
+
 
 ##### 手动实现Object.freeze . (掌握Object.definePrototy已经四种属性特性)
 
@@ -332,3 +312,9 @@ outer();
    由于有引用指向返回的函数，则result指向的函数中的作用域链不可被销毁，则该作用链所对应的活对象就不可被销毁。（此时outer的作用域链由于outer的执行结束已被销毁，但outer对应的活对象由于被返回的函数的作用域链所引用，所以依旧存在内存中。）
 
 #### 原型链 -继承
+
+# css3
+
+如何实现两边固定，中间自适应的布局
+
+如何实现水平垂直居中
