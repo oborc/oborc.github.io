@@ -95,7 +95,7 @@ e-tag相当于文件的hash码，只有当文件内容改变的时候才使缓�
 
 ### 标准盒模型、position\display;
 
-## 1.mvvm是什么：vue是如何实现mvvm的
+## mvvm是什么：vue是如何实现mvvm的
 
 Model（模型） view（视图） viewModel（视图模型）
 
@@ -105,17 +105,15 @@ Model（模型） view（视图） viewModel（视图模型）
 
 视图模型：模型和视图的通信方式： dom变化通知模型，模型变化通知视图（称之为双向绑定）
 
-## 2.Object.defineProprty()实现拦截（vue-实现数据驱动的原理--拦截）手动实现
+## Object.defineProprty()实现拦截（vue-实现数据驱动的原理--拦截）手动实现
 
-## 3.proxy的实现原理。如何用proxy实现拦截
+## proxy的实现原理。如何用proxy实现拦截
 
 Object.definePrototy和proxy的区别，优缺点
 
 proxy相当于重写了get方法。实现一个handler处理方法，在需要拦截的属性上进行处理。
 
-## 4.引用类型和普通类型的区别-- 在definePrototy中的表现区别
-
-## 5.普通类型的转换，当用 == 时。数据会做什么样的变化？
+## 普通类型的转换，当用 == 时。数据会做什么样的变化？
 
 在用==的时候，会对数据类型做转换，当有boolen值的时候，另外一个会转成boolean，有数字的话会转成数字
 
@@ -128,17 +126,17 @@ proxy相当于重写了get方法。实现一个handler处理方法，在需要�
 '' == false
 ```
 
-## 6.js事件机制里的微任务和宏任务有什么区别
+## js事件机制里的微任务和宏任务有什么区别
 
 执行栈为空时，先轮巡微任务队列，再轮巡宏任务队列
 
-## 7.promise 和setTimeout 有什么区别
+## promise 和setTimeout 有什么区别
 
-setTimeout 宏任务
+setTimeout 宏任务 == 》延迟回调函数的执行时间
 
-Promise 微任务
+Promise 微任务 = >解决回调地狱的问题（更优雅的使用回调），用来处理异步程序。
 
-## 8.读程序
+## 读程序
 
 ```javascript
 //执行栈 ===》 直接输出，不需要回调的。
@@ -192,19 +190,19 @@ task2 执行。task3进入微任务队列
 // 1475236
 ```
 
-## 9.vue.nextTick是什么，原理是什么，如何实现的
+## vue.nextTick是什么，原理是什么，如何实现的
 
 vue渲染dom是异步的，将需要修改的dom进队，在下一个事件循环中进行处理队列中的dom操作。如果有对数据变化后的dom的操作，则数据变化之后，dom不会发生改变（因为异步。此时还没有进行到下一个事件循环，dom操作不会执行，）可以用vue.nextTick将"对变化后的dom的操作"放入回调函数中，则会在dom变化之后执行。相当于延迟“对变化后的dom的操作”。
 
-## 10.js中await和async理解原理
+## js中await和async理解原理
 
 await 是Generator函数的语法糖，用来在异步函数中实现同步
 
-## 11.promise如何实现并发请求
+## promise如何实现并发请求
 
 Promise.all?
 
-## 12.伪数组
+## 伪数组
 
 es6新增特性：
 
