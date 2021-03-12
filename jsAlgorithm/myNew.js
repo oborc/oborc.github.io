@@ -10,6 +10,8 @@ function person(name,age){
 }
 
 Object.prototype.myNew = function(constructor,args){
+	// 利用js提供的方法来创建一个__proto__指向constructor的对象。
+	// 也可以用o.__proto__ == constructor.prototype来实现
 	let o = Object.create(constructor.prototype);
 	constructor.apply(o,args);
 	return o;
