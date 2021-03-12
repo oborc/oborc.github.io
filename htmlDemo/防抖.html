@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="left">left</div>
+		<div class="center" id = "showNumber"></div>
+		<div class="right">right</div>
+	</body>
+	<style type="text/css">
+		body{
+			display: flex;
+			flex-direction: row;
+		}
+		.left,.right{
+			width: 30px;
+			height: 1024px;
+			background-color: antiquewhite;
+		}
+		.center{
+			width: 100%;
+			background-color: aqua;
+		}
+	</style>
+	<script>
+		(function(){
+			let node = document.querySelector("#showNumber");
+			node.onclick=fangDou(1000);
+		})();		
+		function fangDou(wate){
+			let count = 0;
+			let timmer = null;
+			return function(){
+				clearTimeout(timmer); //将上次执行的timmer置空，如果一直触发事件，则一直取消上次的setTimeout
+				// 新建一个setTimeout,在wate的时间后执行
+				timmer = setTimeout(function(){
+					console.log(count+">>>");
+					count=count+1;
+					console.log(count);
+				},wate);
+			}
+		}
+	</script>
+</html>
