@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="left"></div>
+			<div class="center" id="showNumber"></div>
+			<div class="right"></div>
+		</div>
+	</body>
+	<style type="text/css">
+		body{
+			position: absolute;
+			height: 100%;
+			width: 100%;
+		}
+		.container{
+			display: grid;
+			grid-template-columns: 15% 70% 15%;
+			height: 100%;
+			width: 100%;
+		}
+		.left,.right{
+			background-color: #00FFFF;
+		}
+		.center{
+			background-color: #FAEBD7;
+		}
+	</style>
+	<script>
+		(function(){
+			let node = document.querySelector("#showNumber");
+			node.onclick=jiliu(1000);
+		})();		
+		// 一段时间内触发一次。不会重新计数
+		function jiliu(wate){
+			let count = 0;
+			let timmer = true;
+			return function(){
+				if(!timmer){
+					return;
+				}
+				timmer = false;
+				setTimeout(function(){
+					console.log(count+">>>");
+					count=count+1;
+					console.log(count);
+					timmer = true; //将上次执行的timmer置空，如果一直触发事件，则一直取消上次的setTimeout
+				},wate);			
+			}
+		}
+	</script>
+</html>

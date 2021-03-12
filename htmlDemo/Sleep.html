@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		// sleep函数实现
+		(function(){
+			sleep(2000,function(){
+				console.log("after" + 2000 + 's');
+			});
+		})();
+		function sleep(time,fn){
+			let now = Date.now();
+			let start = Date.now();
+			while(now - start <=time){
+				now = Date.now();
+			};
+			fn.apply(this,null);
+		}
+	</script>
+</html>
