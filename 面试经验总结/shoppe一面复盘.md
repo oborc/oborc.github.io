@@ -130,7 +130,7 @@ proxy相当于重写了get方法。实现一个handler处理方法，在需要�
 
 执行栈为空时，先轮巡微任务队列，再轮巡宏任务队列
 
-## promise 和setTimeout 有什么区别
+## promise 和setTimeout 有什么区别、async await
 
 setTimeout 宏任务 == 》延迟回调函数的执行时间
 
@@ -190,11 +190,65 @@ task2 执行。task3进入微任务队列
 // 1475236
 ```
 
+```javascript
+async  function  async1(){
+    console.log('1')
+    await async2()
+    console.log('2')
+}
+async function async2(){
+   console.log('3')
+}
+
+console.log('4')
+
+setTimeout(function(){
+   console.log('5')
+},0)
+
+async1();
+
+new Promise(function(resolve){
+  console.log('6')
+  resolve();
+}).then(function(){
+  console.log('7')
+});
+
+console.log('8')
+```
+
+```javascript
+输出顺序：解析
+前面两个async1 和 async2是函数定义。暂时不会执行。
+从 console.log(4)开始执行。
+console.log(4)是宏任务，直接压入栈并执行，   输出4.
+setTimeout(function())... 定时宏任务。延迟为0，立即压入宏任务队列。
+async1执行，在当前函数内部，console.log(1)是宏任务，立即执行。   输出1
+执行到await async2().async2相当于普通函数，直接执行，输出3;await 将当前线程让出，等待其他任务执行完毕后，获取执行权。继续执行当前代码块及后面的console.log(2);将console.log(2)放入微任务队列。
+new promise这里先执行 new promise,   输出6  然后将promise.then(console.log(7))压入微任务队列
+执行宏任务console.log(8).   输出8
+遍历微任务队列 输出2
+微任务队列 输出7
+宏任务队列 输出5
+最终结果为：41368275
+
+
+```
+
+
+
+
+
 ## vue.nextTick是什么，原理是什么，如何实现的
 
 vue渲染dom是异步的，将需要修改的dom进队，在下一个事件循环中进行处理队列中的dom操作。如果有对数据变化后的dom的操作，则数据变化之后，dom不会发生改变（因为异步。此时还没有进行到下一个事件循环，dom操作不会执行，）可以用vue.nextTick将"对变化后的dom的操作"放入回调函数中，则会在dom变化之后执行。相当于延迟“对变化后的dom的操作”。
 
 ## js中await和async理解原理
+
+
+
+
 
 await 是Generator函数的语法糖，用来在异步函数中实现同步
 
