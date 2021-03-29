@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- display flex 必须规定高度，否则会用子元素的高度来进行填充，不会自动充满整个高度 -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="left">left</div>
+		<div class="center">center</div>
+		<div class="right">right</div>
+	</body>
+	<style type="text/css">
+		html,body{
+			height: 100%; /*当height为百分比时，要么用子元素撑满，要么用父元素得到，所以要设置html的高度为100%,html的高度为整个屏幕*/
+			width: 100%;
+			padding: 0;
+			margin: 0; /*去掉body默认的margin*/
+			background-color: #00FFFF;
+			position: relative; /*absolute也可*/
+		}
+		.left{
+			position: absolute;
+			width: 100px;
+			left: 0;
+			top: 0;
+			height: 100%;
+			background-color: #808080;
+		}
+		.right{
+			position: absolute;
+			width: 100px;
+			right: 0;
+			top: 0;
+			height: 100%;
+			background-color: #808080;
+			
+		}
+		.center{
+			width: 100%;
+			height: 100%;
+			margin: 0 100px;/*absplute使得左右两边的侧边栏脱离文档流，所以要在视觉上将在中间的自适应需要用margin将侧边栏的位置空出来*/
+			background-color: red;
+		}
+	</style>
+</html>

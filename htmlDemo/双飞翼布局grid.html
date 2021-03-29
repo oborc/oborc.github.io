@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- body 设置为absolute 时，高度和宽度的百分比才会生效 -->
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -12,16 +13,16 @@
 		</div>
 	</body>
 	<style type="text/css">
-		body{
-			position: absolute;
+		html,body{
 			height: 100%;
 			width: 100%;
+			background-color: red;
+			margin: 0; /*去掉body默认的margin*/
 		}
 		.container{
 			display: grid;
 			grid-template-columns: 15% 70% 15%;
 			height: 100%;
-			width: 100%;
 		}
 		.left,.right{
 			background-color: #00FFFF;
