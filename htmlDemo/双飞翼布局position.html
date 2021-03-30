@@ -20,7 +20,7 @@
 			position: relative; /*absolute也可*/
 		}
 		.left{
-			position: absolute;
+			position: absolute; /*absoulte的包含块为离他最近的定位祖先元素，在本例中为body*/
 			width: 100px;
 			left: 0;
 			top: 0;
@@ -39,7 +39,7 @@
 		.center{
 			width: 100%;
 			height: 100%;
-			margin: 0 100px;/*absplute使得左右两边的侧边栏脱离文档流，所以要在视觉上将在中间的自适应需要用margin将侧边栏的位置空出来*/
+			margin: 0 100px;/*absolute使得左右两边的侧边栏脱离文档流，所以要在视觉上将在中间的自适应需要用margin将侧边栏的位置空出来*/
 			background-color: red;
 		}
 	</style>
