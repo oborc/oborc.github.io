@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- display flex 必须规定高度，否则会用子元素的高度来进行填充，不会自动充满整个高度 -->
+<!-- 当前模式，实际上还是使用了float将左右边栏浮动在两侧，只是通过calc函数计算中间位置的宽度，来达到中间的铺满自适应，不是使用
+ margin来空出边距。（如果不实用浮动布局的，由于都是快元素，会另起一行，成为三列叠加而不是并排存在的效果）-->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="left">left</div>
+		<div class="right">right</div>
+		<div class="center">center</div>
+	</body>
+	<style type="text/css">
+		html,body{
+			height: 100%; /*当height为百分比时，要么用子元素撑满，要么用父元素得到，所以要设置html的高度为100%,html的高度为整个屏幕*/
+			width: 100%;
+			padding: 0;
+			margin: 0; /*去掉body默认的margin*/
+			background-color: #00FFFF;
+		}
+		.left{
+			width: 100px;
+			height: 100%;
+			float: left;
+			background-color: #808080;
+		}
+		.right{
+			width: 100px;
+			height: 100%;
+			float: right;
+			background-color: #808080;
+			
+		}
+		.center{
+			width: calc(100% - 100px);
+			height: 100%;
+			background-color: red;
+		}
+	</style>
+</html>
