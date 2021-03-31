@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- display flex 必须规定高度，否则会用子元素的高度来进行填充，不会自动充满整个高度 -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="left">left</div>
+		<div class="right">right</div>
+		<!-- 这里要特别注意，由于html是按顺序渲染的，所以当center放在right前面的时候，center会占据整个页面，导致right
+		 向右浮动的时候会另起一行，所以需要把flot的元素放在最前面才能实现视觉上的效果（三行）。实际上、float的左右边栏是浮在center
+		 上面。center占据了整个屏幕。center使用margin 来将实际box将左右占据的位置从视觉上空出来-->
+		<div class="center">cnter</div>
+	</body>
+	<style type="text/css">
+		html,body{
+			height: 100%; /*当height为百分比时，要么用子元素撑满，要么用父元素得到，所以要设置html的高度为100%,html的高度为整个屏幕*/
+			width: 100%;
+			padding: 0;
+			margin: 0; /*去掉body默认的margin*/
+			background-color: #00FFFF;
+		}
+		.left{
+			float: left;
+			height: 100%;
+			width: 100px;
+			background-color: #808080;
+		}
+		.right{
+			float: right;
+			height: 100%;
+			width: 100px;
+			background-color: #808080;
+		}
+		.center{
+			height: 100%;
+			margin: 0 100px;/*float使得左右两边的侧边栏脱离文档流，所以要在视觉上将在中间的自适应需要用margin将侧边栏的位置空出来*/
+			background-color: red;
+		}
+	</style>
+</html>
