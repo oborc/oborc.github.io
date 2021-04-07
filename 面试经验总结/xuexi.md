@@ -332,3 +332,12 @@ promiseAll中，所有的对象都是fulfilled的时候，返回结果才是fulf
 
 
 
+Object.isPrototypeOf 和**instanceof** 的区别
+
+个人理解 isPrototypeOf 是判断某个对象是否是某个实例的原型
+
+instanceof是判断某个实例是否在某个对象的原型链上。
+
+ instanceof是和对象(构造函数)本身比较
+
+isPrototypeOf 是拿构造函数（方法）的原型对象和实例比较
