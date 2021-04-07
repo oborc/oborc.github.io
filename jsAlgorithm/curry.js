@@ -21,4 +21,4 @@ currAdd = curry(add);
 console.log("======================");
 console.log(currAdd(1)(2));
 console.log(currAdd(1,2));
-console.log(currAdd(1));
+console.log(currAdd(1);
